@@ -1,0 +1,198 @@
+{
+    "departmentName": "Computer Science",
+    "departmentFee": 80000.0,
+    "courses": [
+        {
+            "courseName": "Introduction To Computer Science",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Calculus 1",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Physic ",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Reading and Writing in English",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Introduction To Programming",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Globalization",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Programming Languages",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Physic 2",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Programming 2",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Calculus 2",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Linear Algebra",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Technology of World",
+            "difficulty": 2
+        },
+        {
+            "courseName": "History Of Computer",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Discrete MathMathics",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Differantial",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Data Structures",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Quality Management",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Algorithms",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Numerical Analysis",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Probability and Statistics",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Introdoction To Database",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Computer Applications",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Human Computer Interaction",
+            "difficulty": 3
+        },
+        {
+            "courseName": "System Analysis",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Object Oriented Programming 1",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Visual Programming",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Computer Networks",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Software Development",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Web Applications 1",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Robotics Programming",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Database 2",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Object Oriented Programming 2",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Computer Graphics",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Ecology",
+            "difficulty": 2
+        },
+        {
+            "courseName": "Internet Of Things",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Computer Electronics",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Mobile Programming",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Automata ",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Computer Hardwares",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Project Management",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Software Testing",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Service Oriented Arhitectures",
+            "difficulty": 3
+        },
+        {
+            "courseName": "Graduation Project",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Artifical Inteligence",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Game Programming",
+            "difficulty": 5
+        },
+        {
+            "courseName": "Computer Networks 2",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Design Patterns",
+            "difficulty": 4
+        },
+        {
+            "courseName": "Intern",
+            "difficulty": 4
+        }
+    ]
+}
