@@ -26,32 +26,30 @@ public class GenderSelection : BaseSelection
 
     public void OnGenderSelected(Gender gender)
     {
-        Debug.Log("On Clicke");
-
         if (gender == Gender.Man)
         {
-            FindObjectOfType<CharacterCreationScreen>().character.gender = Gender.Man;
-            Debug.Log("Man Gender selected");
+            FindObjectOfType<CharacterCreationScreen>().character.characterGender = Gender.Man.ToString();
         }
         else if (gender == Gender.Woman)
         {
-
-            FindObjectOfType<CharacterCreationScreen>().character.gender = Gender.Man;
-
-            Debug.Log("Woman Gender Selected");
+            FindObjectOfType<CharacterCreationScreen>().character.characterGender = Gender.Man.ToString();
         }
         else
         {
-            Debug.Log("Please Select a gender");
+
         }
     }
 
     public override bool selectionCompleted()
     {
-        return FindObjectOfType<CharacterCreationScreen>().character.gender == Gender.Man || FindObjectOfType<CharacterCreationScreen>().character.gender == Gender.Woman;
+        return (FindObjectOfType<CharacterCreationScreen>().character.characterGender == Gender.Man.ToString()
+            || FindObjectOfType<CharacterCreationScreen>().character.characterGender == Gender.Woman.ToString());
     }
 
-
+    public override void NotCompletedMessage()
+    {
+        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Selecte Character");
+    }
 }
 public enum Gender
 {

@@ -7,4 +7,6 @@ public abstract class BaseSelection : MonoBehaviour
     public abstract void Initiliaze();
 
     public abstract bool selectionCompleted();
+
+    public abstract void NotCompletedMessage();
 }

@@ -13,9 +13,9 @@ public class CharacterCreationScreen : BaseScreen
 
     BaseSelection currentSelectionScreen;
 
-    public CharacterCreation character;
+    public Character character;
 
-    public Character characterC;
+    public CharacterCreationMessageBox characterCreationMessageBox;
 
     private void Start()
     {
@@ -24,15 +24,15 @@ public class CharacterCreationScreen : BaseScreen
 
     public override void InitilizaeScreen()
     {
-
         skipNextButton.OnButtonPressed += OnSkipNextButtonPressed;
 
         skipBackButton.OnButtonPressed += OnSkipBackButtonPressed;
 
-
         currentSelectionScreen = selection[0];
 
-        character = new CharacterCreation();
+        character = new Character();
+
+        character.characterName = "";
     }
 
     public void OnSkipNextButtonPressed()
@@ -43,6 +43,10 @@ public class CharacterCreationScreen : BaseScreen
             {
                 SkipNext();
             }
+            else
+            {
+                currentSelectionScreen.NotCompletedMessage();
+            }
         }
     }
 
@@ -50,13 +54,13 @@ public class CharacterCreationScreen : BaseScreen
     {
         int indexCurrent = selection.FindIndex(a => a == currentSelectionScreen);
 
-        if (indexCurrent > selection.Count)
+        if (indexCurrent > 0)
         {
-            BaseSelection backSelection = selection[indexCurrent];
+            BaseSelection backSelection = selection[indexCurrent - 1];
 
             SlideScreen.Instance.SlideScreens(currentSelectionScreen.gameObject.transform, backSelection.gameObject.transform, SlideType.ToLeft);
 
-            //currentSelectionScreen = backSelection;
+            currentSelectionScreen = backSelection;
         }
         else
         {
@@ -66,8 +70,6 @@ public class CharacterCreationScreen : BaseScreen
 
     public void SkipNext()
     {
-        Debug.Log("Skip Next");
-
         int indexCurrent = selection.FindIndex(a => a == currentSelectionScreen);
 
         if (indexCurrent <= (selection.Count - 2))
@@ -84,25 +86,16 @@ public class CharacterCreationScreen : BaseScreen
             CharacterCreationFormCompleted();
         }
     }
+
     public void CharacterCreationFormCompleted()
     {
-        Debug.Log("Character created");
-        FindObjectOfType<GameController>().CreateNewCharacter(characterC);
+        FindObjectOfType<GameController>().CreateNewCharacter(character);
 
-        //Set to Game Play Screen
+        FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen(this.transform);
     }
 
-}
-
-public class CharacterCreation
-{
-    public Gender gender;
-
-    public string nameAndSurname = "";
-
-    public string countryName = "";
-
-    public string universityName = "";
-
-    public string departmentName = "";
+    public void OnMessageReleased(string message)
+    {
+        characterCreationMessageBox.NotifyMessage(message);
+    }
 }

@@ -19,7 +19,7 @@ public class NameSelection : BaseSelection
 
         if (nameAndSurname.NameIsRight())
         {
-            FindObjectOfType<CharacterCreationScreen>().character.nameAndSurname = nameAndSurname;    
+            FindObjectOfType<CharacterCreationScreen>().character.characterName = nameAndSurname;
         }
         else
         {
@@ -31,6 +31,11 @@ public class NameSelection : BaseSelection
     {
         OnNameFilled();
 
-        return FindObjectOfType<CharacterCreationScreen>().character.nameAndSurname.NameIsRight();
+        return FindObjectOfType<CharacterCreationScreen>().character.characterName.NameIsRight();
+    }
+
+    public override void NotCompletedMessage()
+    {
+        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Fill Name Correctly");
     }
 }

@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterCreationMessageBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public RectTransform upPosition;
+
+    public RectTransform downPosition;
+
+    public Text messageBoxText;
+
+    public void NotifyMessage(string message)
     {
-        
+        StartCoroutine(MessageBoxCoroutine(message));
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator MessageBoxCoroutine(string message)
     {
-        
+        this.transform.position = upPosition.position;
+
+        messageBoxText.text = message;
+
+        iTween.MoveTo(this.gameObject, downPosition.position, 1);
+
+        yield return new WaitUntil(() => this.gameObject.transform.position == downPosition.position);
+
+        iTween.MoveTo(this.gameObject, upPosition.position, 2);
     }
 }

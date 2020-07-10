@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GamePlayScreen : BaseScreen
 {
+    public BasicButton schoolButton;
+
+    public BasicButton EnterpriseButton;
+
+    public BasicButton socialButton;
+
     public MainCharacterScreen mainCharacterScreen;
 
     public SchoolScreen schoolScreen;

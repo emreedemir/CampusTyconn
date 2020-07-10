@@ -24,25 +24,21 @@ public class CountrySelection : BaseSelection
     {
         List<Country> allCountries = FindObjectOfType<ResourcesController>().GetAllCountries();
 
-        Debug.Log("Country Count" + allCountries.Count);
-
         for (int i = 0; i < allCountries.Count; i++)
         {
             countrySelectionButtons[i].SetCountrySelectionButton(allCountries[i]);
 
             countrySelectionButtons[i].OnCountrySelectionButtonPressed += OnCountrySelected;
-
-            Debug.Log("Country Selection initiliazed");
         }
     }
 
     public void OnCountrySelected(Country country)
     {
-        Debug.Log("Country Selected");
-
-        FindObjectOfType<CharacterCreationScreen>().character.countryName = country.countryName;
+        FindObjectOfType<CharacterCreationScreen>().character.country = country;
 
         selectedCountrySelectionButton = countrySelectionButtons.Find(x => x.country.Equals(country));
+
+        FillCountryNotificationPanel();
     }
 
     void FillCountryNotificationPanel()
@@ -61,6 +57,20 @@ public class CountrySelection : BaseSelection
 
     public override bool selectionCompleted()
     {
-        return FindObjectOfType<CharacterCreationScreen>().character.countryName != null;
+        Country country = FindObjectOfType<CharacterCreationScreen>().character.country;
+
+        if (countrySelectionButtons.Find(x => x.country.Equals(country)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override void NotCompletedMessage()
+    {
+        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Select Country");
     }
 }

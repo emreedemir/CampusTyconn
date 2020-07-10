@@ -51,6 +51,8 @@ public class DepartmentSelection : BaseSelection
             {
                 selectedDepartmentButton.MarkAsDeselected();
 
+                FindObjectOfType<CharacterCreationScreen>().character.department = department;
+
                 selectedDepartmentButton = selectionButton;
 
                 selectedDepartmentButton.MarkAsSelected();
@@ -60,12 +62,28 @@ public class DepartmentSelection : BaseSelection
         {
             selectedDepartmentButton = selectionButton;
 
+            FindObjectOfType<CharacterCreationScreen>().character.department = department;
+
             selectedDepartmentButton.MarkAsSelected();
         }
     }
 
     public override bool selectionCompleted()
     {
-        return true;
+        Department department = FindObjectOfType<CharacterCreationScreen>().character.department;
+
+        if (departmentSelectionButtons.Find(x => x.department.Equals(department)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override void NotCompletedMessage()
+    {
+        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Selecte Department");
     }
 }

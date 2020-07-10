@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class BaseScreen : MonoBehaviour
 {
     public abstract void InitilizaeScreen();
+
 }
