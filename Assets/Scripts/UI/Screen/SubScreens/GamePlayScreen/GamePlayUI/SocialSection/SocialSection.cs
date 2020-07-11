@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class SocialSection : GameSection
 {
+    public SocialEventButton givePartEventButton;
+
+    public SocialEventButton goConcertEventButton;
+
+    public SocialEventButton meetFirendsEventButton;
+
+    public SocialEventButton goGymEventButton;
+
+    public SocialEventButton goCinemaEventButton;
+
     public override void InitiliazeSection(Character character)
     {
-        throw new System.NotImplementedException();
+        givePartEventButton.OnPressed += character.OnPopularityChanged;
+
+        goConcertEventButton.OnPressed += character.OnHappinessChanged;
+
+        meetFirendsEventButton.OnPressed += character.OnRespectChanged;
+
+        goGymEventButton.OnPressed += character.OnHealthChanged;
+
+        goCinemaEventButton.OnPressed += character.OnSelfRealizationChanged;
+    }
+
+    public void HandleSocialEvent()
+    {
+
     }
 }

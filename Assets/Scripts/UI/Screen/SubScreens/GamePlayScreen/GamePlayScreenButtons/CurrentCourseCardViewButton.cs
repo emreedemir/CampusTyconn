@@ -11,11 +11,13 @@ public class CurrentCourseCardViewButton : MonoBehaviour, IPointerClickHandler
 
     public Text workedHourText;
 
-    public Action<int> OnPressed;
+    public Action<CurrentCourseCardViewButton> OnPressed;
+
+    public Action OnProgressStarted;
 
     public Action OnProgressFinished;
 
-    Course course;
+    public Course course;
 
     public void SetCurrentCourseCardViewButton(Course course)
     {
@@ -26,22 +28,12 @@ public class CurrentCourseCardViewButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (FindObjectOfType<CharacterController>().InProgress == false)
-        {
-            if (course.workedHour < course.difficulty)
-            {
-                course.workedHour += 1;
-                StartCoroutine(WorkCoroutine(1));
-            }
-            else
-            {
-                FindObjectOfType<GamePlayScreen>().NotifyMessage("You enough worked");
-            }
-        }
-        else
-        {
-            FindObjectOfType<GamePlayScreen>().NotifyMessage("Wait Character On Progress!");
-        }
+        OnPressed?.Invoke(this);     
+    }
+
+    public void StartWorkProgress()
+    {
+        StartCoroutine(WorkCoroutine(1));
     }
 
     IEnumerator WorkCoroutine(int workTime)

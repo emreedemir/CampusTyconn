@@ -21,4 +21,16 @@ public struct Course
         this.note = note;
         this.passed = passed;
     }
+
+    public bool IsMaximumWorked()
+    {
+        if (workedHour < difficulty)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

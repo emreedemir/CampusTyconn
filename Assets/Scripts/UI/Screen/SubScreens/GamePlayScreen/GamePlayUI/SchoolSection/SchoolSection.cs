@@ -8,7 +8,6 @@ public class SchoolSection : GameSection
 
     public Transform allCoursesScreen;
 
-
     public BasicButton currentCoursesButton;
 
     public BasicButton allCoursesButton;
@@ -23,7 +22,16 @@ public class SchoolSection : GameSection
 
     public override void InitiliazeSection(Character character)
     {
+        if (character.department.currentCourses.Length == 0)
+        {
+            SetCurrentCoursesScreen(character.department);
+        }
+        else
+        {
+            NotifySectionMessage("Select Your Courses");
+        }
 
+        SetAllCoursesScreen(character.department.courses);
     }
 
     public void SetCurrentCoursesScreen(Department department)
@@ -34,7 +42,7 @@ public class SchoolSection : GameSection
         {
             CurrentCourseCardViewButton cvb = Instantiate(currentCourseCardViewButtonPrefab);
 
-            cvb.SetCurrentCourseCardViewButton(department.currentCourses[i]);
+            cvb.SetCurrentCourseCardViewButton(department.currentCourses[i]);         
         }
     }
 
@@ -54,8 +62,35 @@ public class SchoolSection : GameSection
 
     public void HandleCurrentCourseSelection(CurrentCourseCardViewButton currentCourseCardViewButton)
     {
+        if (FindObjectOfType<CharacterController>().InProgress == false)
+        {
+            if (!currentCourseCardViewButton.course.IsMaximumWorked())
+            {
+               FindObjectOfType<CharacterController>().currentCharacter.CourseWorked(currentCourseCardViewButton.course);
+
+                currentCourseCardViewButton.StartWorkProgress();
+            }
+            else
+            {
+                NotifySectionMessage("You dont need work");
+            }
+        }
+        else
+        {
+            NotifySectionMessage("Character In Progress");
+        }
+    }
+
+    public void HandleProgressStart()
+    {
 
     }
+
+    public void HandleProgressFinish()
+    {
+
+    }
+
 
     public void HandleCourseSelection(CourseSelectionButton courseSelectionButton)
     {
@@ -70,5 +105,10 @@ public class SchoolSection : GameSection
     public void OnPressedAllCoursesButton()
     {
         SlideScreen.Instance.SlideScreens(currentCoursesScreen.gameObject.transform, allCoursesScreen.gameObject.transform, SlideType.ToLeft);
+    }
+
+    public void NotifySectionMessage(string message)
+    {
+
     }
 }
