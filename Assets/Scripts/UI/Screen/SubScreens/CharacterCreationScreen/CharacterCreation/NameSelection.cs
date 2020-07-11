@@ -19,7 +19,7 @@ public class NameSelection : BaseSelection
 
         if (nameAndSurname.NameIsRight())
         {
-            FindObjectOfType<CharacterCreationScreen>().character.characterName = nameAndSurname;
+            FindObjectOfType<CharacterCreationScreen>().character.SetNameAndSurname(nameAndSurname);
         }
         else
         {

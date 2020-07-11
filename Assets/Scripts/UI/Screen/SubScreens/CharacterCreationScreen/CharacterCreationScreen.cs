@@ -32,7 +32,7 @@ public class CharacterCreationScreen : BaseScreen
 
         character = new Character();
 
-        character.characterName = "";
+        character.SetNameAndSurname("");
     }
 
     public void OnSkipNextButtonPressed()

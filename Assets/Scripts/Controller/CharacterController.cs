@@ -1,12 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
     public Character currentCharacter;
 
     public List<ICharacterObserver> allObservers;
+
+    public Action<int> OnHealthChanged;
+
+    public Action<int> OnHappinessChanged;
+
+    public Action<int> OnMoneyChanged;
+
+    public Action<int> OnTimeChanged;
     
 
     public void SetCharacter()
@@ -16,7 +25,7 @@ public class CharacterController : MonoBehaviour
     
     public void NotifyObservers()
     {
-        allObservers.ForEach(x => x.Update(currentCharacter));
+        allObservers.ForEach(x => x.UpdateCharacterValues(currentCharacter));
     }
 
     private void OnApplicationQuit()
@@ -36,6 +45,12 @@ public class CharacterController : MonoBehaviour
 
     public void OnCharacterFinishProgress()
     {
+
+    }
+
+    private void Update()
+    {
+        float deltaTime = Time.deltaTime;
 
     }
 }

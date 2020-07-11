@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnterpriseSection : GameSection
 {
-    public override void InitiliazeSection()
+    public override void InitiliazeSection(Character character)
     {
 
     }

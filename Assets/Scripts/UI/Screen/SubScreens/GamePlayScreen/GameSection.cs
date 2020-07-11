@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class GameSection : MonoBehaviour
 {
-    public abstract void InitiliazeSection();
+    public abstract void InitiliazeSection(Character character);
    
 
 }

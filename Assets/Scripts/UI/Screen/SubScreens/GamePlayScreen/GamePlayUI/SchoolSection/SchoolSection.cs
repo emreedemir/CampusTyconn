@@ -12,11 +12,9 @@ public class SchoolSection: GameSection
 
     List<CurrentCourseCardViewButton> allCurrentCourseCardViewButtons;
 
-    public override void InitiliazeSection()
+    public override void InitiliazeSection(Character character)
     {
         allCurrentCourseCardViewButtons = new List<CurrentCourseCardViewButton>();
-
-        Character character = FindObjectOfType<CharacterController>().currentCharacter;
 
         for (int i = 0; i < character.department.currentCourses.Length; i++)
         {

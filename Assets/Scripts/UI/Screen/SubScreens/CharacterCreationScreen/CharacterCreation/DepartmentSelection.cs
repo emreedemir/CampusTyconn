@@ -51,7 +51,7 @@ public class DepartmentSelection : BaseSelection
             {
                 selectedDepartmentButton.MarkAsDeselected();
 
-                FindObjectOfType<CharacterCreationScreen>().character.department = department;
+                FindObjectOfType<CharacterCreationScreen>().character.SetDepartment(department);
 
                 selectedDepartmentButton = selectionButton;
 
@@ -62,7 +62,7 @@ public class DepartmentSelection : BaseSelection
         {
             selectedDepartmentButton = selectionButton;
 
-            FindObjectOfType<CharacterCreationScreen>().character.department = department;
+            FindObjectOfType<CharacterCreationScreen>().character.SetDepartment(department);
 
             selectedDepartmentButton.MarkAsSelected();
         }

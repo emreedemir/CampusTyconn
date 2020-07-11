@@ -34,7 +34,7 @@ public class CountrySelection : BaseSelection
 
     public void OnCountrySelected(Country country)
     {
-        FindObjectOfType<CharacterCreationScreen>().character.country = country;
+        FindObjectOfType<CharacterCreationScreen>().character.SetCountry(country);
 
         selectedCountrySelectionButton = countrySelectionButtons.Find(x => x.country.Equals(country));
 

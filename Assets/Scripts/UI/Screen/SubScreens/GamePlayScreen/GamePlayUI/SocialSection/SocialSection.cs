@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SocialSection : GameSection
 {
-    public override void InitiliazeSection()
+    public override void InitiliazeSection(Character character)
     {
         throw new System.NotImplementedException();
     }

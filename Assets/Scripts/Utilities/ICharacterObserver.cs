@@ -1,5 +1,5 @@
 ﻿
 public interface ICharacterObserver
 {
-    void Update(Character character);
+    void UpdateCharacterValues(Character character);
 }

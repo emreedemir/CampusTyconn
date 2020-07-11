@@ -28,11 +28,11 @@ public class GenderSelection : BaseSelection
     {
         if (gender == Gender.Man)
         {
-            FindObjectOfType<CharacterCreationScreen>().character.characterGender = Gender.Man.ToString();
+            FindObjectOfType<CharacterCreationScreen>().character.SetGender(Gender.Man.ToString());
         }
         else if (gender == Gender.Woman)
         {
-            FindObjectOfType<CharacterCreationScreen>().character.characterGender = Gender.Man.ToString();
+            FindObjectOfType<CharacterCreationScreen>().character.SetGender(Gender.Man.ToString());
         }
         else
         {
