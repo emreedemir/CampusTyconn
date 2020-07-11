@@ -22,8 +22,7 @@ public class CharacterValueViewer : MonoBehaviour
     }
 
     public void UpdateValue(int deltaValue)
-    {
-       
+    {     
         slider.value += deltaValue*10;
     }
 

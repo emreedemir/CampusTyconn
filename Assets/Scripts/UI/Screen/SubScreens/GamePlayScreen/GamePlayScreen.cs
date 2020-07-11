@@ -53,6 +53,16 @@ public class GamePlayScreen : BaseScreen
     {
     }
 
+    public void NotifyMessage(string message)
+    {
+        StartCoroutine(MessageCoroutine(message));
+    }
+
+    IEnumerator MessageCoroutine(string message)
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
 
     public void HandleSectionButtonPressed(GameSection gameSection)
     {

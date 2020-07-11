@@ -45,8 +45,6 @@ public class Character
 
     public int creditFee { get; private set; }
 
-
-
     public Character()
     {
         creditFee = 0;
@@ -167,5 +165,10 @@ public class Character
         }
 
         OnPopularityChanged?.Invoke(popularity);
+    }
+
+    public void CourseWorked(Course course)
+    {
+
     }
 }

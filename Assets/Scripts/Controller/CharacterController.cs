@@ -9,14 +9,7 @@ public class CharacterController : MonoBehaviour
 
     public List<ICharacterObserver> allObservers;
 
-    public Action<int> OnHealthChanged;
-
-    public Action<int> OnHappinessChanged;
-
-    public Action<int> OnMoneyChanged;
-
-    public Action<int> OnTimeChanged;
-    
+    public bool InProgress;
 
     public void SetCharacter()
     {
@@ -36,16 +29,12 @@ public class CharacterController : MonoBehaviour
     public void OnCharacterProgress()
     {
 
-    }
-
-    void DayPass()
-    {
-
+        InProgress = true;
     }
 
     public void OnCharacterFinishProgress()
     {
-
+        InProgress = false;
     }
 
     private void Update()

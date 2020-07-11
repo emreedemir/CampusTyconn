@@ -15,35 +15,44 @@ public class CurrentCourseCardViewButton : MonoBehaviour, IPointerClickHandler
 
     public Action OnProgressFinished;
 
+    Course course;
+
     public void SetCurrentCourseCardViewButton(Course course)
     {
+        this.course = course;
+
         courseName.text = course.courseName;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (3 == 5)
+        if (FindObjectOfType<CharacterController>().InProgress == false)
         {
-            OnPressed?.Invoke(1);
+            if (course.workedHour < course.difficulty)
+            {
+                course.workedHour += 1;
+                StartCoroutine(WorkCoroutine(1));
+            }
+            else
+            {
+                FindObjectOfType<GamePlayScreen>().NotifyMessage("You enough worked");
+            }
         }
-    }
-
-    public void SetWorkHours()
-    {
-
-    }
-
-    public void MarkAsPressed()
-    {
-        StartCoroutine(WorkCoroutine(5));
+        else
+        {
+            FindObjectOfType<GamePlayScreen>().NotifyMessage("Wait Character On Progress!");
+        }
     }
 
     IEnumerator WorkCoroutine(int workTime)
     {
         GetComponent<Image>().color = Color.green;
 
+        FindObjectOfType<CharacterController>().InProgress = true;
+
         yield return new WaitForSeconds(workTime);
 
+        FindObjectOfType<CharacterController>().InProgress = false;
         GetComponent<Image>().color = Color.white;
 
         NotifyMissionFinish();
@@ -53,4 +62,5 @@ public class CurrentCourseCardViewButton : MonoBehaviour, IPointerClickHandler
     {
         OnProgressFinished?.Invoke();
     }
+
 }
