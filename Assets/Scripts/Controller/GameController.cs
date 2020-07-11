@@ -10,4 +10,14 @@ public class GameController : MonoBehaviour
 
        // FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen();
     }
+
+    public Character GetCharacter()
+    {
+        return DataUtility.GetCharacterData();
+    }
+
+    public void SaveCharacterValues(Character character)
+    {
+
+    }
 }

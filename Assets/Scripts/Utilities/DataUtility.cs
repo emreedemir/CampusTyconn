@@ -14,4 +14,9 @@ public static class DataUtility
     {
         Debug.Log("Save data as json file");
     }
+
+    internal static Character GetCharacterData()
+    {
+        throw new NotImplementedException();
+    }
 }

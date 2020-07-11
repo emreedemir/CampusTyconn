@@ -4,195 +4,339 @@
     "courses": [
         {
             "courseName": "Introduction To Computer Science",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Calculus 1",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Physic ",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Reading and Writing in English",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Introduction To Programming",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Globalization",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Programming Languages",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Physic 2",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Programming 2",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Calculus 2",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Linear Algebra",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Technology of World",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "History Of Computer",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Discrete MathMathics",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Differantial",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Data Structures",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Quality Management",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Algorithms",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Numerical Analysis",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Probability and Statistics",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Introdoction To Database",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Applications",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Human Computer Interaction",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "System Analysis",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Object Oriented Programming 1",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Visual Programming",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Networks",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Software Development",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Web Applications 1",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Robotics Programming",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Database 2",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Object Oriented Programming 2",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Graphics",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Ecology",
-            "difficulty": 2
+            "difficulty": 2,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Internet Of Things",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Electronics",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Mobile Programming",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Automata ",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Hardwares",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Project Management",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Software Testing",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Service Oriented Arhitectures",
-            "difficulty": 3
+            "difficulty": 3,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Graduation Project",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Artifical Inteligence",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Game Programming",
-            "difficulty": 5
+            "difficulty": 5,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Computer Networks 2",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Design Patterns",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         },
         {
             "courseName": "Intern",
-            "difficulty": 4
+            "difficulty": 4,
+			"workedHour":0,
+			"note":"",
+			"passed":false
         }
     ]
 }

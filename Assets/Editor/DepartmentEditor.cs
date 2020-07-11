@@ -84,7 +84,7 @@ public class DepartmentEditor : EditorWindow
 
         for (int i = 0; i < editorDatas.Count; i++)
         {
-            Course course = new Course(editorDatas[i].val, int.Parse(editorDatas[i].val2));
+            Course course = new Course(editorDatas[i].val, int.Parse(editorDatas[i].val2), 0, "", false);
 
             coursesArray[i] = course;
         }

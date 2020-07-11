@@ -12,11 +12,14 @@ public struct Department
 
     public Course[] courses;
 
+    public Course[] currentCourses;
+
     public Department(string departmentName, float departmentFee, Course[] courses)
     {
         this.departmentName = departmentName;
         this.departmentFee = departmentFee;
         this.courses = courses;
+        currentCourses = new Course[0];
     }
 
     public override string ToString()
