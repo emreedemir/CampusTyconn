@@ -31,6 +31,9 @@ public class Character
 
     public Action<int> OnPopularityChanged;
 
+    public Action<int> OnMoneyChanged;
+
+    public Action<int> OnCreditFeeChanged;
 
     /// <summary>
     /// Character Non Self Values
@@ -92,6 +95,13 @@ public class Character
 
         OnHealthChanged?.Invoke(health);
 
+    }
+
+    public void SetMoney(int changedValue)
+    {
+        money += changedValue;
+
+        OnMoneyChanged?.Invoke(money);
     }
 
     public void SetHappiness(int changedValue)
@@ -170,5 +180,27 @@ public class Character
     public void CourseWorked(Course course)
     {
 
+    }
+
+    public bool IsEnoughMoney(int amount)
+    {
+        return amount < money;
+    }
+
+    public void SetCreditFee(int amount)
+    {
+        if (creditFee + amount < 0)
+        {
+            creditFee = 0;
+        }
+
+        creditFee += amount;
+
+        OnCreditFeeChanged?.Invoke(creditFee);
+    }
+
+    public bool IsCreditFee()
+    {
+        return creditFee > 0;
     }
 }

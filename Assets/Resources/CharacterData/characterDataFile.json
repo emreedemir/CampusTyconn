@@ -1,0 +1,17 @@
+{
+    "name": "Mesude Can",
+    "gender": 2,
+    "money": {},
+    "happiness": {},
+    "popularity": {},
+    "respect": {},
+    "health": {},
+    "credit": {},
+    "day": {},
+    "department": {
+        "departmentName": "",
+        "departmentFee": 0.0,
+        "courses": [],
+        "currentCourses": []
+    }
+}

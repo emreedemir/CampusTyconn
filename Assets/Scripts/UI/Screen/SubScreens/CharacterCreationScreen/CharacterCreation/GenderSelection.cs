@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GenderSelection : BaseSelection
 {
@@ -8,10 +9,13 @@ public class GenderSelection : BaseSelection
 
     public GenderButton womanButton;
 
-    private void Start()
-    {
-        Initiliaze();
-    }
+    public List<GenderButton> genderButtons;
+
+    public Action<Gender> OnGenderSelected;
+
+    public Action<string> OnNotSelected;
+
+    public GenderButton selectedGenderButton;
 
     public override void Initiliaze()
     {
@@ -24,31 +28,34 @@ public class GenderSelection : BaseSelection
         womanButton.OnClicked += OnGenderSelected;
     }
 
-    public void OnGenderSelected(Gender gender)
+    public void HandleGenderSelection(GenderButton genderButton)
     {
-        if (gender == Gender.Man)
+        if (selectedGenderButton == null)
         {
-            FindObjectOfType<CharacterCreationScreen>().character.SetGender(Gender.Man.ToString());
-        }
-        else if (gender == Gender.Woman)
-        {
-            FindObjectOfType<CharacterCreationScreen>().character.SetGender(Gender.Man.ToString());
-        }
-        else
-        {
+            selectedGenderButton = genderButton;
 
+            //selectedGender Button Mark As Selected
         }
+        else if (selectedGenderButton != genderButton)
+        {
+            //selctedGender Button mark as Deselected
+            selectedGenderButton = genderButton;
+        }
+
+        //genderButton.MarkAsSelected();
+
+        OnGenderSelected?.Invoke(genderButton.gender);
     }
 
     public override bool selectionCompleted()
     {
-        return (FindObjectOfType<CharacterCreationScreen>().character.characterGender == Gender.Man.ToString()
-            || FindObjectOfType<CharacterCreationScreen>().character.characterGender == Gender.Woman.ToString());
+        return selectedGenderButton != null;
     }
 
     public override void NotCompletedMessage()
     {
-        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Selecte Character");
+        OnNotSelected?.Invoke("Please Selecte a Gender");
+        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Select Gender");
     }
 }
 public enum Gender

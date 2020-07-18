@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DepartmentSelection : BaseSelection
 {
@@ -11,6 +12,10 @@ public class DepartmentSelection : BaseSelection
     public Transform departmentListViewParent;
 
     public DepartmentSelectionButton departmentSelectionButtonPrefab;
+
+    public Action<Department> OnDepartmentSelected;
+
+    public Action<string> OnMessageReleased;
 
     private void Start()
     {
@@ -39,7 +44,7 @@ public class DepartmentSelection : BaseSelection
         }
     }
 
-    public void OnDepartmentSelected(Department department)
+    public void HandleDepartmentSelection(Department department)
     {
         DepartmentSelectionButton selectionButton = departmentSelectionButtons.Find(x => x.department.Equals(department));
 
@@ -51,18 +56,22 @@ public class DepartmentSelection : BaseSelection
             {
                 selectedDepartmentButton.MarkAsDeselected();
 
-                FindObjectOfType<CharacterCreationScreen>().character.SetDepartment(department);
+                OnDepartmentSelected?.Invoke(department);
 
                 selectedDepartmentButton = selectionButton;
 
                 selectedDepartmentButton.MarkAsSelected();
+            }
+            else
+            {
+                OnMessageReleased?.Invoke("Already Select Department");
             }
         }
         else
         {
             selectedDepartmentButton = selectionButton;
 
-            FindObjectOfType<CharacterCreationScreen>().character.SetDepartment(department);
+            OnDepartmentSelected?.Invoke(department);
 
             selectedDepartmentButton.MarkAsSelected();
         }
@@ -70,20 +79,11 @@ public class DepartmentSelection : BaseSelection
 
     public override bool selectionCompleted()
     {
-        Department department = FindObjectOfType<CharacterCreationScreen>().character.department;
-
-        if (departmentSelectionButtons.Find(x => x.department.Equals(department)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return selectedDepartmentButton != null;
     }
 
     public override void NotCompletedMessage()
     {
-        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Selecte Department");
+        OnMessageReleased?.Invoke("Please Select Department");
     }
 }

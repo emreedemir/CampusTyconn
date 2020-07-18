@@ -2,82 +2,92 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
-public class GamePlayScreen : BaseScreen
+using CampusTyconn;
+namespace CampusTyconn
 {
-    public BasicButton gameExitButton;
-
-    public GameSectionButton characterSectionButton;
-
-    public GameSectionButton socialSectionButton;
-
-    public GameSectionButton schollSectionButton;
-
-    public GameSectionButton enterpriseSectionButton;
-
-    public List<GameSection> allGameSections;
-
-    private GameSection currentGameSection;
-
-    public Character currentCharacter;
-
-    private void Start()
+    public class GamePlayScreen : BaseScreen
     {
-        InitilizaeScreen();
-    }
+        public BasicButton gameExitButton;
 
-    public override void InitilizaeScreen()
-    {
-        gameExitButton.OnButtonPressed += OnGameExitButtonPressed;
+        public GameSectionButton characterSectionButton;
 
-        socialSectionButton.SetGameSectionButton(allGameSections.Find(x => x is SocialSection));
+        public GameSectionButton socialSectionButton;
 
-        socialSectionButton.OnPressed += HandleSectionButtonPressed;
+        public GameSectionButton schollSectionButton;
 
-        characterSectionButton.SetGameSectionButton(allGameSections.Find(x => x is CharacterSection));
+        public GameSectionButton enterpriseSectionButton;
 
-        characterSectionButton.OnPressed += HandleSectionButtonPressed;
+        public List<GameSection> allGameSections;
 
-        schollSectionButton.SetGameSectionButton(allGameSections.Find(x => x is SchoolSection));
+        private GameSection currentGameSection;
 
-        schollSectionButton.OnPressed += HandleSectionButtonPressed;
+        public Character currentCharacter;
 
-        enterpriseSectionButton.SetGameSectionButton(allGameSections.Find(x => x is EnterpriseSection));
+        private void Start()
+        {
+            InitilizaeScreen();
+        }
 
-        enterpriseSectionButton.OnPressed += HandleSectionButtonPressed;
-
-        currentGameSection = allGameSections.Find(x => x is CharacterSection);
-    }
-
-    public void SetGamePlay()
-    {
-    }
-
-    public void NotifyMessage(string message)
-    {
-        StartCoroutine(MessageCoroutine(message));
-    }
-
-    IEnumerator MessageCoroutine(string message)
-    {
-        yield return new WaitForSeconds(1f);
-    }
+        public override void InitilizaeScreen()
+        {
+            for (int i = 0; i < allGameSections.Count; i++)
+            {
+                allGameSections[i].InitiliazeSection(GameController.Instance.characterData);
+            }
 
 
-    public void HandleSectionButtonPressed(GameSection gameSection)
-    {
-        SlideScreen.Instance.SlideScreens(currentGameSection.transform, gameSection.transform, SlideType.ToLeft);
+            gameExitButton.OnButtonPressed += OnGameExitButtonPressed;
 
-        currentGameSection = gameSection;
-    }
+            socialSectionButton.SetGameSectionButton(allGameSections.Find(x => x is SocialSection));
 
-    public void OnGameExitButtonPressed()
-    {
+            socialSectionButton.OnPressed += HandleSectionButtonPressed;
 
-    }
+            characterSectionButton.SetGameSectionButton(allGameSections.Find(x => x is CharacterSection));
 
-    public void BackToGameMainScreen()
-    {
+            characterSectionButton.OnPressed += HandleSectionButtonPressed;
 
+            schollSectionButton.SetGameSectionButton(allGameSections.Find(x => x is SchoolSection));
+
+            schollSectionButton.OnPressed += HandleSectionButtonPressed;
+
+            enterpriseSectionButton.SetGameSectionButton(allGameSections.Find(x => x is EnterpriseSection));
+
+            enterpriseSectionButton.OnPressed += HandleSectionButtonPressed;
+
+            currentGameSection = allGameSections.Find(x => x is CharacterSection);
+        }
+
+        public void SetGamePlay()
+        {
+        }
+
+        public void NotifyMessage(string message)
+        {
+            StartCoroutine(MessageCoroutine(message));
+        }
+
+        IEnumerator MessageCoroutine(string message)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+
+        public void HandleSectionButtonPressed(GameSection gameSection)
+        {
+            SlideScreen.Instance.SlideScreens(currentGameSection.transform, gameSection.transform, SlideType.ToLeft);
+
+            currentGameSection = gameSection;
+        }
+
+        public void OnGameExitButtonPressed()
+        {
+
+        }
+
+        public void BackToGameMainScreen()
+        {
+
+        }
     }
 }
+

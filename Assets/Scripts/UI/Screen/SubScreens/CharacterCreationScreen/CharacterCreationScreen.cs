@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CampusTyconn;
 
 public class CharacterCreationScreen : BaseScreen
 {
@@ -13,9 +14,10 @@ public class CharacterCreationScreen : BaseScreen
 
     BaseSelection currentSelectionScreen;
 
-    public Character character;
-
     public CharacterCreationMessageBox characterCreationMessageBox;
+
+    public CharacterData characterData;
+
 
     private void Start()
     {
@@ -30,9 +32,7 @@ public class CharacterCreationScreen : BaseScreen
 
         currentSelectionScreen = selection[0];
 
-        character = new Character();
-
-        character.SetNameAndSurname("");
+        characterData = new CharacterData();
     }
 
     public void OnSkipNextButtonPressed()
@@ -89,7 +89,7 @@ public class CharacterCreationScreen : BaseScreen
 
     public void CharacterCreationFormCompleted()
     {
-        FindObjectOfType<GameController>().CreateNewCharacter(character);
+        GameController.Instance.CreateNewCharacter(characterData);
 
         FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen(this.transform);
     }

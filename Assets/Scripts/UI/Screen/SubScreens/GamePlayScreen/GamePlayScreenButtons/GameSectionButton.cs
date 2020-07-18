@@ -5,20 +5,23 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
 
-public class GameSectionButton : MonoBehaviour, IPointerClickHandler
+namespace CampusTyconn
 {
-    public Action<GameSection> OnPressed;
-
-    GameSection section;
-
-
-    public void SetGameSectionButton(GameSection gameSection)
+    public class GameSectionButton : MonoBehaviour, IPointerClickHandler
     {
-        this.section = gameSection;
-    }
+        public Action<GameSection> OnPressed;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OnPressed?.Invoke(section);
+        GameSection section;
+
+
+        public void SetGameSectionButton(GameSection gameSection)
+        {
+            this.section = gameSection;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnPressed?.Invoke(section);
+        }
     }
 }

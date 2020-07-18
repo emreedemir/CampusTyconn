@@ -2,10 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterpriseSection : GameSection
+namespace CampusTyconn
 {
-    public override void InitiliazeSection(Character character)
+    public class EnterpriseSection : GameSection
     {
+        public BasicButton openHospitalEnterpriseButton;
 
+        public BasicButton openBankEnterpriseButton;
+
+        public List<BaseEnterprise> enterprises;
+
+        public override void InitiliazeSection(CharacterData characterData)
+        {
+
+        }
+
+        public void OnHospitalEnterpriseButtonPressed()
+        {
+
+        }
+
+        public void OnBankEnterpriseButtonPressed()
+        {
+
+        }
     }
 }

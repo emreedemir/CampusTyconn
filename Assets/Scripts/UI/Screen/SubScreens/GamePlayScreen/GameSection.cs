@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameSection : MonoBehaviour
+namespace CampusTyconn
 {
-    public abstract void InitiliazeSection(Character character);
-   
+    public abstract class GameSection : MonoBehaviour
+    {
+        public abstract void InitiliazeSection(CharacterData characterData);
 
+    }
 }

@@ -3,44 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
-public class CharacterSection : GameSection, ICharacterObserver
+namespace CampusTyconn
 {
-    public CharacterValueViewer happinessValueViewer;
-
-    public CharacterValueViewer selfRealizationValueViewer;
-
-    public CharacterValueViewer respectValueViewer;
-
-    public CharacterValueViewer healthValueViewer;
-
-    public CharacterValueViewer popularityValueViewer;
-
-    public override void InitiliazeSection(Character character)
+    public class CharacterSection : GameSection, ICharacterObserver
     {
-        happinessValueViewer.SetCharacterValueViewer(character.happiness.GetType().Name.ToUpper(), character.happiness);
+        public CharacterValueViewer happinessValueViewer;
 
-        character.OnHappinessChanged += happinessValueViewer.UpdateValue;
+        public CharacterValueViewer selfRealizationValueViewer;
 
-        selfRealizationValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.selfRealization);
+        public CharacterValueViewer respectValueViewer;
 
-        character.OnSelfRealizationChanged += selfRealizationValueViewer.UpdateValue;
+        public CharacterValueViewer healthValueViewer;
 
-        respectValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.respect);
+        public CharacterValueViewer popularityValueViewer;
 
-        character.OnRespectChanged += selfRealizationValueViewer.UpdateValue;
+        public override void InitiliazeSection(CharacterData characterData)
+        {
+            /*
+            happinessValueViewer.SetCharacterValueViewer(character.happiness.GetType().Name.ToUpper(), character.happiness);
 
-        healthValueViewer.SetCharacterValueViewer(character.health.GetType().Name.ToUpper(), character.health);
+            character.OnHappinessChanged += happinessValueViewer.UpdateValue;
 
-        character.OnHealthChanged += healthValueViewer.UpdateValue;
+            selfRealizationValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.selfRealization);
 
-        popularityValueViewer.SetCharacterValueViewer(character.popularity.GetType().Name.ToUpper(),character.popularity);
+            character.OnSelfRealizationChanged += selfRealizationValueViewer.UpdateValue;
 
-        character.OnPopularityChanged += popularityValueViewer.UpdateValue;
-    }
+            respectValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.respect);
 
-    public void UpdateCharacterValues(Character character)
-    {
+            character.OnRespectChanged += selfRealizationValueViewer.UpdateValue;
 
+            healthValueViewer.SetCharacterValueViewer(character.health.GetType().Name.ToUpper(), character.health);
+
+            character.OnHealthChanged += healthValueViewer.UpdateValue;
+
+            popularityValueViewer.SetCharacterValueViewer(character.popularity.GetType().Name.ToUpper(), character.popularity);
+
+            character.OnPopularityChanged += popularityValueViewer.UpdateValue;
+            */
+        }
+
+        public void UpdateCharacterValues(Character character)
+        {
+
+        }
     }
 }

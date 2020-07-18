@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using CampusTyconn;
+
 public class MainScreensController : MonoBehaviour
 {
     public MainMenu mainMenu;

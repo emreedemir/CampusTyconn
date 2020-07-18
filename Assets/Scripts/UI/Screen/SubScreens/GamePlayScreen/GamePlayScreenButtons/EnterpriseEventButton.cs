@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System;
 
-public class EnterpriseEventButton : MonoBehaviour
+public class EnterpriseEventButton : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int increaseValue;
 
-    // Update is called once per frame
-    void Update()
+    public bool timeNeed;
+
+    public Action<int> OnPressed;
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        OnPressed?.Invoke(increaseValue);
+
     }
 }

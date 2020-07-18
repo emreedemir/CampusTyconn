@@ -4,26 +4,55 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
+using CampusTyconn;
 
-public class SocialEventButton : MonoBehaviour, IPointerClickHandler
+namespace CampusTyconn
 {
-    public Action<int> OnPressed;
-
-    public int changedValue;
-
-    public int socialEventCost;
-
-    public int eventTime;
-
-    public Slider slider;
-
-    public void OnPointerClick(PointerEventData eventData)
+    public class SocialEventButton : MonoBehaviour, IPointerClickHandler
     {
-        OnPressed?.Invoke(changedValue);    
+        public Text socialEventNameText;
+
+        public Text socialEventTargetName;
+
+        public Text socialEventFeautreTargetPlus;
+
+        public Text socialEventCostText;
+ 
+        public Action<SocialEvent> OnPressed;
+
+        public Action<SocialEvent> OnEventEnded;
+
+        public Slider slider;
+
+        public SocialEvent socialEvent;
+
+        public void SetSocialEventButton(SocialEvent socialEvent)
+        {
+            
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnPressed?.Invoke(socialEvent);
+        }
+
+        public void StartEventForButton()
+        {
+            StartCoroutine(StartEventCoroutine(socialEvent.eventTime));
+        }
+
+        public void EndEventForButton()
+        {
+            //Change slider color
+        }
+
+        IEnumerator StartEventCoroutine(int eventTime)
+        {
+            //Slider Animation
+            yield return new WaitForSeconds(1f);
+
+            OnEventEnded?.Invoke(socialEvent);
+        }
     }
 
-    IEnumerator StartEventCoroutine(int progressTime)
-    {       
-        yield return new WaitForSeconds(1f);
-    }
 }

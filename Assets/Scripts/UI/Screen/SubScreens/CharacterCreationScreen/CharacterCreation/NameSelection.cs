@@ -8,34 +8,39 @@ public class NameSelection : BaseSelection
 {
     public InputField nameInputField;
 
+    public Action<string> OnNameFilled;
+
+    public Action<string> OnMessageReleased;
+
     public override void Initiliaze()
     {
         Debug.Log("Initliazed");
     }
 
-    public void OnNameFilled()
+    public void HandleNameFill()
     {
+        
         string nameAndSurname = nameInputField.text;
 
         if (nameAndSurname.NameIsRight())
         {
-            FindObjectOfType<CharacterCreationScreen>().character.SetNameAndSurname(nameAndSurname);
+            OnNameFilled?.Invoke(nameAndSurname);
         }
         else
         {
-            Debug.Log("Please fill name correctly");
+            OnMessageReleased?.Invoke("Please Fill Name");
         }
     }
 
     public override bool selectionCompleted()
     {
-        OnNameFilled();
 
+        //input event lere bak
         return FindObjectOfType<CharacterCreationScreen>().character.characterName.NameIsRight();
     }
 
     public override void NotCompletedMessage()
     {
-        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Fill Name Correctly");
+        OnMessageReleased?.Invoke("Fill Name Correctly");
     }
 }
