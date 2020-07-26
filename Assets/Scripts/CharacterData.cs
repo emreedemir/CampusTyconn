@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CampusTyconn
 {
@@ -8,6 +9,8 @@ namespace CampusTyconn
         public string name;
 
         public Gender gender;
+
+        public Feature[] features;
 
         public Money money;
 
@@ -21,7 +24,7 @@ namespace CampusTyconn
 
         public Health health;
 
-        public Credit credit;
+        public Debt debt;
 
         public Day day;
 
@@ -45,14 +48,14 @@ namespace CampusTyconn
 
             health = new Health();
 
-            credit = new Credit();
+            debt = new Debt();
 
             day = new Day();
 
             department = new Department();
         }
 
-        public CharacterData(Money money, Happiness happiness, Popularity popularity, Respect respect, SelfRealization selfRealization, Health health, Credit credit, Day day)
+        public CharacterData(Money money, Debt debt, Day day, Happiness happiness, Popularity popularity, Respect respect, SelfRealization selfRealization, Health health)
         {
             this.money = money;
             this.happiness = happiness;
@@ -60,8 +63,13 @@ namespace CampusTyconn
             this.respect = respect;
             this.selfRealization = selfRealization;
             this.health = health;
-            this.credit = credit;
+            this.debt = debt;
             this.day = day;
+        }
+
+        public List<Feature> GetAllFeatures()
+        {
+            return new List<Feature>() { happiness, popularity, respect, selfRealization, health };
         }
     }
 }

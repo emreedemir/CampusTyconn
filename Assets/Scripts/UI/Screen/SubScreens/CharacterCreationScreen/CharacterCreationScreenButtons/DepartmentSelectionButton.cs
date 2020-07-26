@@ -5,36 +5,39 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DepartmentSelectionButton : MonoBehaviour, IPointerClickHandler
+namespace CampusTyconn
 {
-    [SerializeField]
-    public Department department;
-
-    public Text departmentNameTextView;
-
-    public Action<Department> OnDepartmentSelectionButtonPressed;
-
-    public void SetDepartmentSelectionButton(Department department)
+    public class DepartmentSelectionButton : MonoBehaviour, IPointerClickHandler
     {
-        this.department = department;
+        [SerializeField]
+        public Department department;
 
-        departmentNameTextView.text = department.departmentName;
-    }
+        public Text departmentNameTextView;
 
-    public void MarkAsSelected()
-    {
-        GetComponent<Image>().color = Color.red;
-    }
+        public Action<DepartmentSelectionButton> OnDepartmentSelectionButtonPressed;
 
-    public void MarkAsDeselected()
-    {
-        GetComponent<Image>().color = Color.blue;
-    }
+        public void SetDepartmentSelectionButton(Department department)
+        {
+            this.department = department;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Department selection button clicked");
+            departmentNameTextView.text = department.departmentName;
+        }
 
-        OnDepartmentSelectionButtonPressed?.Invoke(department);
+        public void MarkAsSelected()
+        {
+            GetComponent<Image>().color = Color.red;
+        }
+
+        public void MarkAsDeselected()
+        {
+            GetComponent<Image>().color = Color.blue;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("Department selection button clicked");
+
+            OnDepartmentSelectionButtonPressed?.Invoke(this);
+        }
     }
 }

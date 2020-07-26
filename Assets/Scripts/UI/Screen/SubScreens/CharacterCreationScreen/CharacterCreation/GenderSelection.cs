@@ -3,64 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GenderSelection : BaseSelection
+namespace CampusTyconn
 {
-    public GenderButton menButton;
-
-    public GenderButton womanButton;
-
-    public List<GenderButton> genderButtons;
-
-    public Action<Gender> OnGenderSelected;
-
-    public Action<string> OnNotSelected;
-
-    public GenderButton selectedGenderButton;
-
-    public override void Initiliaze()
+    public class GenderSelection : BaseSelection
     {
-        menButton.gender = Gender.Man;
+        public GenderButton menButton;
 
-        menButton.OnClicked += OnGenderSelected;
+        public GenderButton womanButton;
 
-        womanButton.gender = Gender.Woman;
+        public Action<Gender> OnGenderSelect;
 
-        womanButton.OnClicked += OnGenderSelected;
-    }
+        public GenderButton selectedGenderButton;
 
-    public void HandleGenderSelection(GenderButton genderButton)
-    {
-        if (selectedGenderButton == null)
+        public override void Initiliaze()
         {
-            selectedGenderButton = genderButton;
+            menButton.gender = Gender.Man;
 
-            //selectedGender Button Mark As Selected
-        }
-        else if (selectedGenderButton != genderButton)
-        {
-            //selctedGender Button mark as Deselected
-            selectedGenderButton = genderButton;
+            menButton.OnClicked += HandleGenderSelection;
+
+            womanButton.gender = Gender.Woman;
+
+            womanButton.OnClicked += HandleGenderSelection;
         }
 
-        //genderButton.MarkAsSelected();
+        public void HandleGenderSelection(GenderButton genderButton)
+        {
+            if (selectedGenderButton == null)
+            {
+                selectedGenderButton = genderButton;
 
-        OnGenderSelected?.Invoke(genderButton.gender);
+            }
+            else if (selectedGenderButton != genderButton)
+            {
+                selectedGenderButton.MarkAsDeselected();
+
+                selectedGenderButton = genderButton;
+            }
+
+            selectedGenderButton.MarkAsSelected();
+
+            OnGenderSelect?.Invoke(genderButton.gender);
+        }
+
+        public override bool SelectionCompleted(CharacterCreationData characterCreationData)
+        {
+            if (selectedGenderButton == null)
+            {
+                OnMessageReleased?.Invoke("Please Select A Gender");
+
+                return false;               
+            }
+            return characterCreationData.gender.Equals(selectedGenderButton.gender);
+        }
     }
-
-    public override bool selectionCompleted()
+    public enum Gender
     {
-        return selectedGenderButton != null;
+        None,
+        Woman,
+        Man
     }
-
-    public override void NotCompletedMessage()
-    {
-        OnNotSelected?.Invoke("Please Selecte a Gender");
-        FindObjectOfType<CharacterCreationScreen>().OnMessageReleased("Please Select Gender");
-    }
-}
-public enum Gender
-{
-    None,
-    Woman,
-    Man
 }

@@ -3,41 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterValueViewer : MonoBehaviour
+namespace CampusTyconn
 {
-    public Text valueNameText;
-
-    public Slider slider;
-
-    public void SetCharacterValueViewer(string valueName,int initialValue)
+    public class CharacterValueViewer : MonoBehaviour
     {
-        valueNameText.name = valueName;
+        public Text valueNameText;
 
-        slider.value = initialValue;
+        public Slider slider;
 
-        if (initialValue < 10)
+        public void SetCharacterValueViewer(Feature feature)
         {
-            MarkAsLow();
+            valueNameText.text = feature.featureName;
+
+            slider.value = 0;
+
+            UpdateValue(feature.featureValue);
+
+            feature.OnFeatureUpdated += UpdateValue;
         }
+
+        public void UpdateValue(int value)
+        {
+            Debug.Log(value +"Feature Value");
+            Debug.Log("UPDATED");
+
+            slider.value =  value;
+
+            if (value < 20)
+            {
+                MarkAsLow();
+            }
+            else
+            {
+                MarkAsHigh();
+            }
+        }
+
+        void MarkAsLow()
+        {
+
+        }
+
+        void MarkAsHigh()
+        {
+
+        }
+
     }
 
-    public void UpdateValue(int deltaValue)
-    {     
-        slider.value += deltaValue*10;
-    }
-
-    void MarkAsLow()
-    {
-        
-    }
-
-    void MarkAsHigh()
-    {
-
-    }
-
-    IEnumerator UpdateSliderValueCoroutine(int changedValue)
-    {
-        yield return new WaitForSeconds(1f);
-    }
 }

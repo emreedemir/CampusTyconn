@@ -24,18 +24,7 @@ namespace CampusTyconn
 
         public override void InitiliazeSection(CharacterData characterData)
         {
-            /*
-            if (character.department.currentCourses.Length == 0)
-            {
-                SetCurrentCoursesScreen(character.department);
-            }
-            else
-            {
-                NotifySectionMessage("Select Your Courses");
-            }
 
-            SetAllCoursesScreen(character.department.courses);
-            */
         }
 
         public void SetCurrentCoursesScreen(Department department)
@@ -64,37 +53,10 @@ namespace CampusTyconn
             }
         }
 
-        public void HandleCurrentCourseSelection(CurrentCourseCardViewButton currentCourseCardViewButton)
+        public void HandleCurrentSessionCourseSelection(CurrentCourseCardViewButton courseSelectionButton)
         {
-            if (FindObjectOfType<CharacterController>().InProgress == false)
-            {
-                if (!currentCourseCardViewButton.course.IsMaximumWorked())
-                {
-                    FindObjectOfType<CharacterController>().currentCharacter.CourseWorked(currentCourseCardViewButton.course);
-
-                    currentCourseCardViewButton.StartWorkProgress();
-                }
-                else
-                {
-                    NotifySectionMessage("You dont need work");
-                }
-            }
-            else
-            {
-                NotifySectionMessage("Character In Progress");
-            }
+            
         }
-
-        public void HandleProgressStart()
-        {
-
-        }
-
-        public void HandleProgressFinish()
-        {
-
-        }
-
 
         public void HandleCourseSelection(CourseSelectionButton courseSelectionButton)
         {
@@ -116,6 +78,4 @@ namespace CampusTyconn
 
         }
     }
-
-
 }

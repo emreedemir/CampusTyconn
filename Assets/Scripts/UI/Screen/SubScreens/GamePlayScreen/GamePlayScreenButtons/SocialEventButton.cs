@@ -14,44 +14,57 @@ namespace CampusTyconn
 
         public Text socialEventTargetName;
 
-        public Text socialEventFeautreTargetPlus;
+        public Text dayText;
 
-        public Text socialEventCostText;
- 
-        public Action<SocialEvent> OnPressed;
+        public Text costText;
 
-        public Action<SocialEvent> OnEventEnded;
-
-        public Slider slider;
+        public Action<SocialEventButton> OnPressed;
 
         public SocialEvent socialEvent;
 
         public void SetSocialEventButton(SocialEvent socialEvent)
         {
-            
+            this.socialEvent = socialEvent;
+
+            this.socialEventNameText.text = socialEvent.eventName;
+
+            string targetName = "";
+
+            foreach (KeyValuePair<Feature, int> pair in socialEvent.targetFeatures)
+            {
+                targetName += pair.Key.featureName + " => " + pair.Value + ", ";
+            }
+
+            socialEventTargetName.text = targetName;
+
+            dayText.text = socialEvent.eventTime + "";
+
+            costText.text = socialEvent.eventCost + "";
+
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnPressed?.Invoke(socialEvent);
+            OnPressed?.Invoke(this);
         }
 
-        public void StartEventForButton()
+        public void MarkAsPressed()
         {
-            StartCoroutine(StartEventCoroutine(socialEvent.eventTime));
+            StartCoroutine(MarkCoroutine(Color.green));
         }
 
-        public void EndEventForButton()
+        public void MarkAsWarning()
         {
-            //Change slider color
+            StartCoroutine(MarkCoroutine(Color.red));
         }
 
-        IEnumerator StartEventCoroutine(int eventTime)
+        IEnumerator MarkCoroutine(Color color)
         {
-            //Slider Animation
-            yield return new WaitForSeconds(1f);
+            this.GetComponent<Image>().color = color;
 
-            OnEventEnded?.Invoke(socialEvent);
+            yield return new WaitForSeconds(2);
+
+            GetComponent<Image>().color = Color.white;
         }
     }
 

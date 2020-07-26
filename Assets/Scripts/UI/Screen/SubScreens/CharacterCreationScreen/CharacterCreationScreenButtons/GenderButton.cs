@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
-
-public class GenderButton : MonoBehaviour,IPointerClickHandler
+namespace CampusTyconn
 {
-    public Gender gender;
-
-    public Action<Gender> OnClicked;
-
-    public void SetGenderButton(Gender gender)
+    public class GenderButton : MonoBehaviour, IPointerClickHandler
     {
-        this.gender = gender;
-    }
+        public Gender gender;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OnClicked?.Invoke(gender);
+        public Action<GenderButton> OnClicked;
+
+        public void SetGenderButton(Gender gender)
+        {
+            this.gender = gender;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnClicked?.Invoke(this);
+        }
+
+        public void MarkAsSelected()
+        {
+
+        }
+
+        public void MarkAsDeselected()
+        {
+
+        }
     }
 }

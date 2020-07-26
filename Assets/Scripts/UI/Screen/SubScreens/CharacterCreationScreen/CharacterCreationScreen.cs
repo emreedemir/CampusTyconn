@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using CampusTyconn;
+using System.Linq;
 
 public class CharacterCreationScreen : BaseScreen
 {
@@ -12,12 +13,11 @@ public class CharacterCreationScreen : BaseScreen
 
     public List<BaseSelection> selection;
 
-    BaseSelection currentSelectionScreen;
+    private BaseSelection currentSelectionScreen;
 
     public CharacterCreationMessageBox characterCreationMessageBox;
 
-    public CharacterData characterData;
-
+    CharacterCreationData characterCreationData;
 
     private void Start()
     {
@@ -26,26 +26,59 @@ public class CharacterCreationScreen : BaseScreen
 
     public override void InitilizaeScreen()
     {
+        characterCreationData = new CharacterCreationData();
+
+        selection.ForEach(x => x.Initiliaze());
+
         skipNextButton.OnButtonPressed += OnSkipNextButtonPressed;
 
         skipBackButton.OnButtonPressed += OnSkipBackButtonPressed;
 
+        NameSelection nameSelection = selection.OfType<NameSelection>().First();
+
+        nameSelection.OnNameFill += HandleNameFill;
+
+        GenderSelection genderSelection = selection.OfType<GenderSelection>().First();
+
+        genderSelection.OnGenderSelect += HandleGenderSelection;
+
+        DepartmentSelection departmentSelection = selection.OfType<DepartmentSelection>().First();
+
+        departmentSelection.OnDepartmentSelected += HandleDepartmentSelection;
+
+        foreach (BaseSelection selection in selection)
+        {
+            selection.OnMessageReleased += HandleMessageReleased;
+        }
+
         currentSelectionScreen = selection[0];
 
-        characterData = new CharacterData();
     }
 
     public void OnSkipNextButtonPressed()
     {
         if (currentSelectionScreen != null)
         {
-            if (currentSelectionScreen.selectionCompleted())
+            if (currentSelectionScreen.SelectionCompleted(characterCreationData))
             {
-                SkipNext();
+                int indexCurrent = selection.FindIndex(a => a == currentSelectionScreen);
+
+                if (indexCurrent <= (selection.Count - 2))
+                {
+                    BaseSelection nextSelection = selection[indexCurrent + 1];
+
+                    SlideScreen.Instance.SlideScreens(currentSelectionScreen.gameObject.transform, nextSelection.gameObject.transform, SlideType.ToLeft);
+
+                    currentSelectionScreen = nextSelection;
+                }
+                else
+                {
+                    CharacterCreationFormCompleted();
+                }
             }
             else
             {
-                currentSelectionScreen.NotCompletedMessage();
+                HandleMessageReleased("Fill Correctly");
             }
         }
     }
@@ -58,7 +91,7 @@ public class CharacterCreationScreen : BaseScreen
         {
             BaseSelection backSelection = selection[indexCurrent - 1];
 
-            SlideScreen.Instance.SlideScreens(currentSelectionScreen.gameObject.transform, backSelection.gameObject.transform, SlideType.ToLeft);
+            SlideScreen.Instance.SlideScreens(currentSelectionScreen.gameObject.transform, backSelection.gameObject.transform, SlideType.ToRight);
 
             currentSelectionScreen = backSelection;
         }
@@ -68,34 +101,48 @@ public class CharacterCreationScreen : BaseScreen
         }
     }
 
-    public void SkipNext()
+    public void HandleNameFill(string name)
     {
-        int indexCurrent = selection.FindIndex(a => a == currentSelectionScreen);
+        characterCreationData.name = name;
+    }
 
-        if (indexCurrent <= (selection.Count - 2))
-        {
-            Debug.Log("Sekme açıldı" + indexCurrent);
-            BaseSelection nextSelection = selection[indexCurrent + 1];
+    public void HandleGenderSelection(Gender gender)
+    {
+        Debug.Log("Gender Selected");
+        characterCreationData.gender = gender;
+    }
 
-            SlideScreen.Instance.SlideScreens(currentSelectionScreen.gameObject.transform, nextSelection.gameObject.transform, SlideType.ToLeft);
+    public void HandleDepartmentSelection(Department department)
+    {
+        Debug.Log("Department Selected");
 
-            currentSelectionScreen = nextSelection;
-        }
-        else
-        {
-            CharacterCreationFormCompleted();
-        }
+        characterCreationData.department = department;
     }
 
     public void CharacterCreationFormCompleted()
     {
-        GameController.Instance.CreateNewCharacter(characterData);
-
-        FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen(this.transform);
+        GameController.Instance.CreateNewCharacter(characterCreationData);
     }
 
-    public void OnMessageReleased(string message)
+    public void HandleMessageReleased(string message)
     {
         characterCreationMessageBox.NotifyMessage(message);
+    }
+}
+
+public class CharacterCreationData
+{
+    public Gender gender;
+
+    public Department department;
+
+    public string name;
+
+    public CharacterCreationData()
+    {
+        gender = Gender.None;
+        name = "";
+        department = new Department();
+
     }
 }

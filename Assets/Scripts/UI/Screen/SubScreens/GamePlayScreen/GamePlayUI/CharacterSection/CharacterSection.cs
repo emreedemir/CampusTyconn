@@ -3,47 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
+
 namespace CampusTyconn
 {
-    public class CharacterSection : GameSection, ICharacterObserver
+    public class CharacterSection : GameSection
     {
-        public CharacterValueViewer happinessValueViewer;
+        public ExternalFeatureViewer moneyViewer;
 
-        public CharacterValueViewer selfRealizationValueViewer;
+        public ExternalFeatureViewer debtViewer;
 
-        public CharacterValueViewer respectValueViewer;
+        public ExternalFeatureViewer dayViewer;
 
-        public CharacterValueViewer healthValueViewer;
-
-        public CharacterValueViewer popularityValueViewer;
+        public List<CharacterValueViewer> characterValueViewers;
 
         public override void InitiliazeSection(CharacterData characterData)
         {
-            /*
-            happinessValueViewer.SetCharacterValueViewer(character.happiness.GetType().Name.ToUpper(), character.happiness);
+            List<Feature> allFeatures = characterData.GetAllFeatures();
 
-            character.OnHappinessChanged += happinessValueViewer.UpdateValue;
+            var viewAndFeatures = allFeatures.Zip(characterValueViewers, (f, w) => new { Feature = f,Viewer = w });
 
-            selfRealizationValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.selfRealization);
+            foreach (var pair in viewAndFeatures)
+            {
+                pair.Viewer.SetCharacterValueViewer(pair.Feature);
+            }
 
-            character.OnSelfRealizationChanged += selfRealizationValueViewer.UpdateValue;
+            moneyViewer.UpdateValue(characterData.money.moneyAmount);
 
-            respectValueViewer.SetCharacterValueViewer(character.selfRealization.GetType().Name.ToUpper(), character.respect);
+            characterData.money.OnMoneyAmountChanged += moneyViewer.UpdateValue;
 
-            character.OnRespectChanged += selfRealizationValueViewer.UpdateValue;
+            debtViewer.UpdateValue(characterData.debt.debtAmount);
 
-            healthValueViewer.SetCharacterValueViewer(character.health.GetType().Name.ToUpper(), character.health);
+            characterData.debt.OnDebtValueChanged += debtViewer.UpdateValue;
 
-            character.OnHealthChanged += healthValueViewer.UpdateValue;
+            dayViewer.UpdateValue(characterData.day.deltaDay);
 
-            popularityValueViewer.SetCharacterValueViewer(character.popularity.GetType().Name.ToUpper(), character.popularity);
-
-            character.OnPopularityChanged += popularityValueViewer.UpdateValue;
-            */
-        }
-
-        public void UpdateCharacterValues(Character character)
-        {
+            characterData.day.OnDayPassed += dayViewer.UpdateValue;
 
         }
     }

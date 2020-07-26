@@ -13,6 +13,11 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         InitilizaeMainScreen();
+
+        if (GameController.Instance.characterData == null)
+        {
+            //return Game button make cancel
+        }
     }
 
     void InitilizaeMainScreen()
@@ -32,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnReturnGameButtonPressed()
     {
-        FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen(this.transform);
+        GameController.Instance.SetGame(this.transform);
     }
 
     public void OnOpenOptionsButtonPressed()

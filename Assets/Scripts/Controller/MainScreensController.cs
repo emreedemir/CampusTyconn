@@ -14,6 +14,7 @@ public class MainScreensController : MonoBehaviour
 
     public OptionsScreen optionScreen;
 
+    public InitilizationScreen initilizationScreen;
 
     public void OpenCharacterCreationScreen(Transform current)
     {
@@ -33,5 +34,10 @@ public class MainScreensController : MonoBehaviour
     public void OpenOptionsScreen(Transform current)
     {
         SlideScreen.Instance.SlideScreens(current, optionScreen.transform, SlideType.ToLeft);
+    }
+
+    public void OpenInitiliazationScreen(Transform current)
+    {
+        SlideScreen.Instance.SlideScreens(current,initilizationScreen.transform,SlideType.ToLeft);
     }
 }

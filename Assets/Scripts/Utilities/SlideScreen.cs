@@ -23,8 +23,7 @@ public class SlideScreen : Singleton<SlideScreen>
         }
         else if (slideType == SlideType.ToRight)
         {
-            Debug.Log("Şimdilik sağa yok");
-            //StartCoroutine(SlideScreensToRight(current, come));
+            StartCoroutine(SlideScreensToRight(current, come));
         }
     }
 
@@ -41,8 +40,6 @@ public class SlideScreen : Singleton<SlideScreen>
         yield return new WaitUntil(() => come.position == centerPosition.position);
 
         layerObject.SetActive(false);
-
-        Debug.Log("Obkect layer closed");
     }
 
     private IEnumerator SlideScreensToRight(Transform center, Transform come)

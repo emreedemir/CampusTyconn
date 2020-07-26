@@ -36,6 +36,10 @@ public sealed class GameController : MonoBehaviour
             }
             return character;
         }
+        set
+        {
+            character = value;
+        }
     }
 
     public static GameController Instance
@@ -51,10 +55,6 @@ public sealed class GameController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        SaveAndLoadUtility.CreateRandomCharacter();
-    }
     public bool CanCharaterMakeEvent()
     {
         return currentEvent == null;
@@ -77,9 +77,27 @@ public sealed class GameController : MonoBehaviour
         currentEvent = null;
     }
 
-    public void CreateNewCharacter(CharacterData characterData)
+    public void CreateNewCharacter(CharacterCreationData characterCreationData)
     {
-        SaveAndLoadUtility.CreateNewCharacter(characterData);
+        CharacterData characterData = SaveAndLoadUtility.CreateNewCharacter(characterCreationData);
+
+        SaveAndLoadUtility.SaveCharacterData(characterData);
+
+        this.character = null;
+
+        CharacterCreationScreen characterCreationScreen = FindObjectOfType<CharacterCreationScreen>();
+
+        SetGame(characterCreationScreen.transform);
+    }
+
+    public void SetGame(Transform current)
+    {
+        FindObjectOfType<MainScreensController>().OpenInitiliazationScreen(current);
+
+        FindObjectOfType<MainScreensController>().OpenMainGamePlayScreen(FindObjectOfType<InitilizationScreen>().transform);
+
+        FindObjectOfType<GamePlayScreen>().InitilizaeScreen();
+
     }
 
     public Character GetCharacter()

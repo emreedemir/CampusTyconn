@@ -10,30 +10,6 @@ public class ResourcesController : MonoBehaviour
 
     private List<Feature> characterFeatures;
 
-    public List<Feature> allCharacterFeature
-    {
-        get
-        {
-            if (characterFeatures == null)
-            {
-                characterFeatures = InitiliazeCharacterFeatures(GameController.Instance.characterData);
-            }
-            return characterFeatures;
-        }
-    }
-
-    public List<SocialEvent> allSocialEvents
-    {
-        get
-        {
-            if (socialEvents == null)
-            {
-                socialEvents = InitiliazeSocialEvents(GameController.Instance.characterData);
-            }
-            return socialEvents;
-        }
-    }
-
     public List<TextAsset> GetAllCountriesTextAssset()
     {
         return Resources.LoadAll<TextAsset>("Countries/").ToList();
@@ -76,11 +52,6 @@ public class ResourcesController : MonoBehaviour
         return classType;
     }
 
-    public Sprite GetFlagSprite(string countryName)
-    {
-        return Resources.Load<Sprite>("Sprites/Flags" + countryName + "image");
-    }
-
     public List<SocialEvent> InitiliazeSocialEvents(CharacterData characterData)
     {
         List<SocialEvent> socialEvents = new List<SocialEvent>();
@@ -114,9 +85,29 @@ public class ResourcesController : MonoBehaviour
         return socialEvents;
     }
 
+    public Sprite GetCharacterImage(Gender gender)
+    {
+        if (gender == Gender.Man)
+        {
+            return null;
+        }
+        else if (gender == Gender.Woman)
+        {
+            return null;
+        }
+        return null;
+    }
+
     public CharacterData GetCharacterData()
     {
-        TextAsset textCharacterDataAsset = Resources.Load<TextAsset>("/CharacterData");
+        TextAsset textCharacterDataAsset = Resources.Load<TextAsset>("CharacterData/characterDataFile");
+
+        if (textCharacterDataAsset == null)
+        {
+            Debug.LogWarning("Firrtst Create A Character ");
+            return null;
+        }
+
 
         CharacterData newCharacterData = JsonUtility.FromJson<CharacterData>(textCharacterDataAsset.text);
 

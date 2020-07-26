@@ -2,88 +2,104 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
-public class DepartmentSelection : BaseSelection
+namespace CampusTyconn
 {
-    List<DepartmentSelectionButton> departmentSelectionButtons;
-
-    DepartmentSelectionButton selectedDepartmentButton;
-
-    public Transform departmentListViewParent;
-
-    public DepartmentSelectionButton departmentSelectionButtonPrefab;
-
-    public Action<Department> OnDepartmentSelected;
-
-    public Action<string> OnMessageReleased;
-
-    private void Start()
+    public class DepartmentSelection : BaseSelection
     {
-        Initiliaze();
-    }
+        List<DepartmentSelectionButton> departmentSelectionButtons;
 
-    public override void Initiliaze()
-    {
-        departmentSelectionButtons = new List<DepartmentSelectionButton>();
+        DepartmentSelectionButton selectedDepartmentButton;
 
-        List<Department> allDepartment = FindObjectOfType<ResourcesController>().GetAllDepartments();
+        public Transform departmentListViewParent;
 
-        Debug.Log("Department countt" + allDepartment.Count);
+        public DepartmentSelectionButton departmentSelectionButtonPrefab;
 
-        for (int i = 0; i < allDepartment.Count; i++)
+        public Action<Department> OnDepartmentSelected;
+
+        public Text departmentInfo;
+
+        public override void Initiliaze()
         {
-            DepartmentSelectionButton dsb = Instantiate(departmentSelectionButtonPrefab, departmentListViewParent);
+            departmentSelectionButtons = new List<DepartmentSelectionButton>();
 
-            dsb.transform.SetParent(departmentListViewParent);
+            List<Department> allDepartment = FindObjectOfType<ResourcesController>().GetAllDepartments();
 
-            dsb.SetDepartmentSelectionButton(allDepartment[i]);
-
-            departmentSelectionButtons.Add(dsb);
-
-            dsb.OnDepartmentSelectionButtonPressed += OnDepartmentSelected;
-        }
-    }
-
-    public void HandleDepartmentSelection(Department department)
-    {
-        DepartmentSelectionButton selectionButton = departmentSelectionButtons.Find(x => x.department.Equals(department));
-
-        Debug.Log("Department selected");
-
-        if (selectedDepartmentButton != null)
-        {
-            if (selectedDepartmentButton != selectionButton)
+            for (int i = 0; i < allDepartment.Count; i++)
             {
-                selectedDepartmentButton.MarkAsDeselected();
+                DepartmentSelectionButton dsb = Instantiate(departmentSelectionButtonPrefab, departmentListViewParent);
 
-                OnDepartmentSelected?.Invoke(department);
+                dsb.transform.SetParent(departmentListViewParent);
 
-                selectedDepartmentButton = selectionButton;
+                dsb.SetDepartmentSelectionButton(allDepartment[i]);
 
-                selectedDepartmentButton.MarkAsSelected();
+                departmentSelectionButtons.Add(dsb);
+
+                dsb.OnDepartmentSelectionButtonPressed += HandleDepartmentSelection;
+            }
+        }
+
+        public void HandleDepartmentSelection(DepartmentSelectionButton departmentSelectionButton)
+        {
+            if (selectedDepartmentButton != null)
+            {
+                if (selectedDepartmentButton != departmentSelectionButton)
+                {
+                    selectedDepartmentButton.MarkAsDeselected();
+
+                    OnDepartmentSelected?.Invoke(departmentSelectionButton.department);
+
+                    selectedDepartmentButton = departmentSelectionButton;
+
+                    selectedDepartmentButton.MarkAsSelected();
+
+                    ViewDepartmentInfo(selectedDepartmentButton.department);
+                }
+                else
+                {
+                    OnMessageReleased?.Invoke("Already Selected Department");
+                }
             }
             else
             {
-                OnMessageReleased?.Invoke("Already Select Department");
+                Debug.Log("Dpartment ilk defa seçildi");
+
+                selectedDepartmentButton = departmentSelectionButton;
+
+                OnDepartmentSelected?.Invoke(departmentSelectionButton.department);
+
+                selectedDepartmentButton.MarkAsSelected();
+
+                ViewDepartmentInfo(selectedDepartmentButton.department);
+
             }
         }
-        else
+
+        public override bool SelectionCompleted(CharacterCreationData characterCreationData)
         {
-            selectedDepartmentButton = selectionButton;
+            if (selectedDepartmentButton == null)
+            {
+                OnMessageReleased?.Invoke("Select A Department");
+                return false;
+            }
 
-            OnDepartmentSelected?.Invoke(department);
+            return characterCreationData.department.Equals(selectedDepartmentButton.department);
+        }
 
-            selectedDepartmentButton.MarkAsSelected();
+
+        private void ViewDepartmentInfo(Department department)
+        {
+            int hardnessOfDepartment = 0;
+
+            for (int i = 0; i < department.currentCourses.Length; i++)
+            {
+                hardnessOfDepartment += department.currentCourses[i].difficulty;
+            }
+            hardnessOfDepartment /= department.currentCourses.Length;
+
+            departmentInfo.text = "Difficult of Department " + hardnessOfDepartment;
         }
     }
 
-    public override bool selectionCompleted()
-    {
-        return selectedDepartmentButton != null;
-    }
-
-    public override void NotCompletedMessage()
-    {
-        OnMessageReleased?.Invoke("Please Select Department");
-    }
 }

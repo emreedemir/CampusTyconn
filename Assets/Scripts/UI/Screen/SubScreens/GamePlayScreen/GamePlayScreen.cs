@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using CampusTyconn;
+
+using UnityEngine.UI;
+
 namespace CampusTyconn
 {
     public class GamePlayScreen : BaseScreen
@@ -21,12 +24,7 @@ namespace CampusTyconn
 
         private GameSection currentGameSection;
 
-        public Character currentCharacter;
-
-        private void Start()
-        {
-            InitilizaeScreen();
-        }
+        public Text characterNameText;
 
         public override void InitilizaeScreen()
         {
@@ -35,6 +33,10 @@ namespace CampusTyconn
                 allGameSections[i].InitiliazeSection(GameController.Instance.characterData);
             }
 
+            ///DAHA SONRA DÜZELT
+            //characterSectionButton.GetComponent<Image>().sprite = FindObjectOfType<ResourcesController>().GetCharacterImage(GameController.Instance.characterData.gender);
+
+            characterNameText.text = GameController.Instance.characterData.name;
 
             gameExitButton.OnButtonPressed += OnGameExitButtonPressed;
 
@@ -55,10 +57,8 @@ namespace CampusTyconn
             enterpriseSectionButton.OnPressed += HandleSectionButtonPressed;
 
             currentGameSection = allGameSections.Find(x => x is CharacterSection);
-        }
 
-        public void SetGamePlay()
-        {
+            Debug.Log("Game Sections İnitiliazed");
         }
 
         public void NotifyMessage(string message)
@@ -70,7 +70,6 @@ namespace CampusTyconn
         {
             yield return new WaitForSeconds(1f);
         }
-
 
         public void HandleSectionButtonPressed(GameSection gameSection)
         {

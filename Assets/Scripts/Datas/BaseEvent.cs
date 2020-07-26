@@ -2,6 +2,6 @@
 {
     public abstract class BaseEvent
     {
-        public abstract void ExecuteEvent(CharacterData character);
+        public abstract void ExecuteEvent();
     }
 }

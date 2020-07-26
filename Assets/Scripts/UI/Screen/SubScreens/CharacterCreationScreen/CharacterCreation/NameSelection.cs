@@ -4,43 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class NameSelection : BaseSelection
+namespace CampusTyconn
 {
-    public InputField nameInputField;
-
-    public Action<string> OnNameFilled;
-
-    public Action<string> OnMessageReleased;
-
-    public override void Initiliaze()
+    public class NameSelection : BaseSelection
     {
-        Debug.Log("Initliazed");
-    }
+        public InputField nameInputField;
 
-    public void HandleNameFill()
-    {
-        
-        string nameAndSurname = nameInputField.text;
+        public Action<string> OnNameFill;
 
-        if (nameAndSurname.NameIsRight())
+        public override void Initiliaze()
         {
-            OnNameFilled?.Invoke(nameAndSurname);
+            Debug.Log("Initliazed");
+
+            nameInputField.onEndEdit.AddListener(fieldValue =>
+            {
+                if (!nameInputField.text.NameIsRight())
+                {
+                    OnMessageReleased?.Invoke("Please Fill Name Correctly");
+                }
+                else
+                {
+                    OnNameFill?.Invoke(nameInputField.text);
+                }
+            });
         }
-        else
+
+        public override bool SelectionCompleted(CharacterCreationData characterCreationData)
         {
-            OnMessageReleased?.Invoke("Please Fill Name");
+            if (!characterCreationData.name.NameIsRight())
+            {
+                OnMessageReleased?.Invoke("Please Fill Name");
+                return false;
+            }
+
+            return characterCreationData.name == nameInputField.text;
         }
-    }
-
-    public override bool selectionCompleted()
-    {
-
-        //input event lere bak
-        return FindObjectOfType<CharacterCreationScreen>().character.characterName.NameIsRight();
-    }
-
-    public override void NotCompletedMessage()
-    {
-        OnMessageReleased?.Invoke("Fill Name Correctly");
     }
 }

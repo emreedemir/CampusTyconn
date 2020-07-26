@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using UnityEngine;
 
     public sealed class SocialEvent : BaseEvent
     {
@@ -12,10 +13,6 @@
         public int eventCost { get; set; }
 
         public string eventMessage { get; set; }
-
-        public Action<string> OnEventMessageReleased { get; set; }
-
-        public Action<SocialEvent> OnEventStarted { get; set; }
 
         public Dictionary<Feature, int> targetFeatures;
 
@@ -29,28 +26,12 @@
             targetFeatures.Add(targetFeature, plusValue);
         }
 
-        public override void ExecuteEvent(CharacterData character)
+        public override void ExecuteEvent()
         {
-            if (character.money.IsEnough(eventCost))
+            foreach (KeyValuePair<Feature, int> pair in targetFeatures)
             {
-                EventMessage(eventMessage);
-
-                foreach (KeyValuePair<Feature, int> pair in targetFeatures)
-                {
-                    pair.Key.AddValue(pair.Value);
-                }
-
-                OnEventStarted?.Invoke(this);
+                pair.Key.AddValue(pair.Value);
             }
-            else
-            {
-                EventMessage(character.money.notEnoughMessage);
-            }
-        }
-
-        public void EventMessage(string message)
-        {
-            OnEventMessageReleased?.Invoke(message);
         }
     }
 

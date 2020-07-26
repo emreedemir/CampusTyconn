@@ -14,69 +14,57 @@ namespace CampusTyconn
 
         public Transform listViewParent;
 
-        CharacterData charData;
-
-        public Action<BaseEvent> OnEventStarted;
-
-        public Action<BaseEvent> OnEventEnded;
-
-        public Action<string> OnMessageReleased;
+        CharacterData characterData;
 
         public override void InitiliazeSection(CharacterData characterData)
         {
-            List<SocialEvent> socialEvents = FindObjectOfType<ResourcesController>().allSocialEvents;
+            this.characterData = characterData;
 
-            Debug.Log("SocialEvent" + socialEvents.Count);
+            List<SocialEvent> socialEvents = FindObjectOfType<ResourcesController>().InitiliazeSocialEvents(characterData);
+
+            allSocialEventButtons = new List<SocialEventButton>();
+
+            Debug.Log("Social Event Count" +socialEvents.Count);
 
             for (int i = 0; i < socialEvents.Count; i++)
             {
-                SocialEventButton socialEventButton = Instantiate(socialEventButtonPrefab);
+                SocialEventButton newSocialEventButton = Instantiate(socialEventButtonPrefab);
 
-                socialEventButton.SetSocialEventButton(socialEvents[i]);
+                newSocialEventButton.transform.SetParent(listViewParent);
 
-                socialEventButton.OnPressed += HandleSocialEventStart;
+                newSocialEventButton.SetSocialEventButton(socialEvents[i]);
 
-                socialEvents[i].OnEventMessageReleased += HandleSocialEventMessage;
-
-                socialEvents[i].OnEventStarted += HandleSocialEventStarted;
-
-                socialEventButton.transform.SetParent(listViewParent);
-
-                allSocialEventButtons.Add(socialEventButton);
+                newSocialEventButton.OnPressed += HandleSocialEventSelection;
             }
 
-            allSocialEventButtons = new List<SocialEventButton>();
         }
 
-        public void HandleSocialEventStart(SocialEvent socialEvent)
+        public void HandleSocialEventSelection(SocialEventButton socialEventButton)
         {
-            socialEvent.ExecuteEvent(charData);
+            SocialEvent social = socialEventButton.socialEvent;
+
+            if (characterData.money.IsEnoughMoney(social.eventCost))
+            {
+                social.ExecuteEvent();
+
+                characterData.day.UpdateDay(social.eventTime);
+
+                characterData.money.UpdateMoney(social.eventCost);
+
+                socialEventButton.MarkAsPressed();
+
+                ReleaseMessage(social.eventMessage);
+            }
+            else
+            {
+                socialEventButton.MarkAsWarning();
+                ReleaseMessage("Need more Money");
+            }
         }
 
-        public void HandleSocialEventStarted(SocialEvent socialEvent)
+        public void ReleaseMessage(string message)
         {
-            allSocialEventButtons.Find(x => x.Equals(socialEvent)).StartEventForButton();
-
-            OnEventStarted?.Invoke(socialEvent);
-        }
-
-        public void HandleSocialEventEnd(SocialEvent socialEvent)
-        {
-            SocialEventButton socialEventButton = allSocialEventButtons.Find(x => x.Equals(socialEvent));
-
-            socialEventButton.EndEventForButton();
-
-            OnEventEnded?.Invoke(socialEvent);
-        }
-
-        public void HandleSocialEventMessage(string message)
-        {
-            OnMessageReleased?.Invoke(message);
-        }
-
-        public void HandleSocialEventSelection(SocialEvent socialEvent)
-        {
-            socialEvent.ExecuteEvent(charData);
+            Debug.Log(message);
         }
     }
 }
