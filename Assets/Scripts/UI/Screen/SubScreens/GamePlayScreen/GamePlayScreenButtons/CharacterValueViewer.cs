@@ -20,14 +20,12 @@ namespace CampusTyconn
             UpdateValue(feature.featureValue);
 
             feature.OnFeatureUpdated += UpdateValue;
+
         }
 
         public void UpdateValue(int value)
         {
-            Debug.Log(value +"Feature Value");
-            Debug.Log("UPDATED");
-
-            slider.value =  value;
+            slider.value = value;
 
             if (value < 20)
             {

@@ -40,11 +40,7 @@ public class CurrentCourseCardViewButton : MonoBehaviour, IPointerClickHandler
     {
         GetComponent<Image>().color = Color.green;
 
-        FindObjectOfType<CharacterController>().InProgress = true;
-
         yield return new WaitForSeconds(workTime);
-
-        FindObjectOfType<CharacterController>().InProgress = false;
         GetComponent<Image>().color = Color.white;
 
         NotifyMissionFinish();

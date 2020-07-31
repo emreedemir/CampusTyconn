@@ -10,7 +10,6 @@ namespace CampusTyconn
 
         public BasicButton openBankEnterpriseButton;
 
-        public List<BaseEnterprise> enterprises;
 
         public override void InitiliazeSection(CharacterData characterData)
         {

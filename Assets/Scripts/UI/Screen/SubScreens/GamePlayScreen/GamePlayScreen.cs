@@ -28,9 +28,10 @@ namespace CampusTyconn
 
         public override void InitilizaeScreen()
         {
+            CharacterData characterData = GameController.Instance.characterData;
             for (int i = 0; i < allGameSections.Count; i++)
             {
-                allGameSections[i].InitiliazeSection(GameController.Instance.characterData);
+                allGameSections[i].InitiliazeSection(characterData);
             }
 
             ///DAHA SONRA DÜZELT

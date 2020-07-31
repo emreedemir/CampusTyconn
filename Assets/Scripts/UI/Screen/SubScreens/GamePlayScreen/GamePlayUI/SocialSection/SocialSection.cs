@@ -24,8 +24,6 @@ namespace CampusTyconn
 
             allSocialEventButtons = new List<SocialEventButton>();
 
-            Debug.Log("Social Event Count" +socialEvents.Count);
-
             for (int i = 0; i < socialEvents.Count; i++)
             {
                 SocialEventButton newSocialEventButton = Instantiate(socialEventButtonPrefab);

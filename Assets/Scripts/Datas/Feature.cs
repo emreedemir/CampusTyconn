@@ -23,14 +23,6 @@
         {
             featureValue = GetValue(value);
 
-            if (OnFeatureUpdated == null)
-            {
-                Debug.Log("Action is null");
-            }
-            else
-            {
-                Debug.Log("Action not null çagrılmalı");
-            }
             OnFeatureUpdated?.Invoke(featureValue);
         }
 

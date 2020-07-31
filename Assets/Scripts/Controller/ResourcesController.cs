@@ -6,10 +6,6 @@ using CampusTyconn;
 
 public class ResourcesController : MonoBehaviour
 {
-    private List<SocialEvent> socialEvents;
-
-    private List<Feature> characterFeatures;
-
     public List<TextAsset> GetAllCountriesTextAssset()
     {
         return Resources.LoadAll<TextAsset>("Countries/").ToList();
@@ -69,10 +65,9 @@ public class ResourcesController : MonoBehaviour
 
         socialEvents.Add(cinema);
 
-  
+
         SocialEvent meetFriends = SocialEventBuilder.CreateNewEvent().SetEventName("Meet Friends")
             .SetEventCost(20).SetEventMessage("Entertaining Meet").AddTargetFeatureToEvent(new KeyValuePair<Feature, int>(characterData.happiness, 10));
-
         socialEvents.Add(meetFriends);
 
 
@@ -107,7 +102,6 @@ public class ResourcesController : MonoBehaviour
             Debug.LogWarning("Firrtst Create A Character ");
             return null;
         }
-
 
         CharacterData newCharacterData = JsonUtility.FromJson<CharacterData>(textCharacterDataAsset.text);
 

@@ -100,18 +100,6 @@ public sealed class GameController : MonoBehaviour
 
     }
 
-    public Character GetCharacter()
-    {
-        return DataUtility.GetCharacterData();
-    }
-
-
-
-    public void SaveCharacterValues(Character character)
-    {
-
-    }
-
     public CharacterData InitiliazeCharacterData()
     {
         return FindObjectOfType<ResourcesController>().GetCharacterData();
