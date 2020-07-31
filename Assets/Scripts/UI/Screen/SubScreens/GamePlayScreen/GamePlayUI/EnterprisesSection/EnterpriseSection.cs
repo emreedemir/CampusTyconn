@@ -25,5 +25,10 @@ namespace CampusTyconn
         {
 
         }
+
+        public override void ReleaseMessage(string messega)
+        {
+            base.OnGameSectionMessageReleased?.Invoke(messega);
+        }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 using CampusTyconn;
 using System;
 
+/// <summary>
+/// COMPLETED
+/// </summary>
 namespace CampusTyconn
 {
     public class SocialSection : GameSection
@@ -56,13 +59,13 @@ namespace CampusTyconn
             else
             {
                 socialEventButton.MarkAsWarning();
-                ReleaseMessage("Need more Money");
+                ReleaseMessage("Need more money");
             }
         }
 
-        public void ReleaseMessage(string message)
+        public override void ReleaseMessage(string message)
         {
-            Debug.Log(message);
+            base.OnGameSectionMessageReleased?.Invoke(message);
         }
     }
 }

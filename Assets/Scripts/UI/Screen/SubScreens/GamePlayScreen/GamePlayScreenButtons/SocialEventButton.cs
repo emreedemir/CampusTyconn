@@ -64,7 +64,7 @@ namespace CampusTyconn
 
             yield return new WaitForSeconds(2);
 
-            GetComponent<Image>().color = Color.white;
+            GetComponent<Image>().color = Color.gray;
         }
     }
 

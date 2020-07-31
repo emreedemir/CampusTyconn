@@ -6,9 +6,9 @@ namespace CampusTyconn
 {
     public class SchoolSection : GameSection
     {
-        public Transform currentCoursesScreen;
+        public Transform currentCoursesScreenParent;
 
-        public Transform allCoursesScreen;
+        public Transform allCoursesScreenParent;
 
         public BasicButton currentCoursesButton;
 
@@ -24,18 +24,24 @@ namespace CampusTyconn
 
         public override void InitiliazeSection(CharacterData characterData)
         {
+            SetCurrentCoursesScreen(characterData.department.currentCourses);
 
+            SetAllCoursesScreen(characterData.department.courses);
         }
 
-        public void SetCurrentCoursesScreen(Department department)
+        public void SetCurrentCoursesScreen(Course[] currentCourses)
         {
             allCurrentCourseCardViewButtons = new List<CurrentCourseCardViewButton>();
 
-            for (int i = 0; i < department.currentCourses.Length; i++)
+            for (int i = 0; i < currentCourses.Length; i++)
             {
                 CurrentCourseCardViewButton cvb = Instantiate(currentCourseCardViewButtonPrefab);
 
-                cvb.SetCurrentCourseCardViewButton(department.currentCourses[i]);
+                cvb.SetCurrentCourseCardViewButton(currentCourses[i]);
+
+                cvb.transform.SetParent(currentCoursesScreenParent.transform);
+
+                allCurrentCourseCardViewButtons.Add(cvb);
             }
         }
 
@@ -47,6 +53,8 @@ namespace CampusTyconn
             {
                 CourseSelectionButton csb = Instantiate(courseSelectionButtonPrefab);
 
+                csb.transform.SetParent(allCoursesScreenParent.transform);
+
                 csb.SetCourseSelectionButton(courses[i]);
 
                 allCourseSelectionButtons.Add(csb);
@@ -55,7 +63,24 @@ namespace CampusTyconn
 
         public void HandleCurrentSessionCourseSelection(CurrentCourseCardViewButton courseSelectionButton)
         {
-            
+            Course course = courseSelectionButton.course;
+
+            if (course.workedHour >= course.difficulty)
+            {
+                ReleaseMessage("You dont need to work anymore");
+            }
+            else
+            {
+                course.workedHour++;
+
+                ReleaseMessage("Productive hard times");
+
+                if (course.workedHour ==course.difficulty)
+                {
+                    courseSelectionButton.MarkAsFullTimeWorked();
+                }
+
+            }
         }
 
         public void HandleCourseSelection(CourseSelectionButton courseSelectionButton)
@@ -65,17 +90,22 @@ namespace CampusTyconn
 
         public void OnPressedCurrentCoursesButton()
         {
-            SlideScreen.Instance.SlideScreens(allCoursesScreen.gameObject.transform, currentCoursesScreen.gameObject.transform, SlideType.ToRight);
+            SlideScreen.Instance.SlideScreens(allCoursesScreenParent.gameObject.transform, currentCoursesScreenParent.gameObject.transform, SlideType.ToRight);
         }
 
         public void OnPressedAllCoursesButton()
         {
-            SlideScreen.Instance.SlideScreens(currentCoursesScreen.gameObject.transform, allCoursesScreen.gameObject.transform, SlideType.ToLeft);
+            SlideScreen.Instance.SlideScreens(currentCoursesScreenParent.gameObject.transform, allCoursesScreenParent.gameObject.transform, SlideType.ToLeft);
         }
 
         public void NotifySectionMessage(string message)
         {
 
+        }
+
+        public override void ReleaseMessage(string messega)
+        {
+            base.OnGameSectionMessageReleased?.Invoke(messega);
         }
     }
 }
